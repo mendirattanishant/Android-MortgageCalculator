@@ -8,6 +8,12 @@
     <string name="tax_rate">Tax Rate in %</string>
     <string name="action_settings">Settings</string>
     <string name="dollar">$</string>
+    <string name="calculatebuttton">Calculate</string>
+    <string name="payoffdate">Pay Off Date</string>
+    <string name="resetbutton">Reset</string>
+    <string name="totaltaxpaid">Total Tax Paid</string>
+    <string name="totalinterestpaid">Total Interest Paid</string>
+    <string name="monthlypayment">Total Tax Paid</string>
     <string-array name="numbers">
         <item>15</item>
         <item>20</item>
