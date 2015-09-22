@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+
 import java.util.Calendar;
 import  java.lang.Math;
 import java.util.Locale;
@@ -30,23 +32,26 @@ public class CalculateLoan extends AppCompatActivity {
         final EditText paydate = (EditText) findViewById(R.id.PayOffDate);
         final EditText monthlypayment = (EditText) findViewById(R.id.MonthlyPayment);
         final EditText tip1 = (EditText) findViewById(R.id.TotalInterestPaid);
-        final EditText tax_paid = (EditText) findViewById(R.id.TotalTaxPaid);
+        final TextView tax_paid = (TextView) findViewById(R.id.TotalTaxPaid);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 double hv = 0;
                 double dp = 0;
                 double tr = 0;
                 double apr1 = 0;
 
-                if (home_value.getText().toString().length() <= 0){
-                    home_value.setError("Please enter a number");
-                } else if (down_payment.getText().toString().length() <= 0){
-                        down_payment.setError("Please enter a number");
-                } else if (apr.getText().toString().length() <= 0){
-                            apr.setError("Please enter a number");
+                if (home_value.getText().toString().length() <= 0) {
+                    home_value.setError("Please enter a number for Home Value");
+                } else if (down_payment.getText().toString().length() < 0) {
+                    down_payment.setError("Please enter a number for Down Payment");
+                } else if (apr.getText().toString().length() <= 0) {
+                    apr.setError("Please enter a number for APR");
                 } else if (taxrate.getText().toString().length() <= 0) {
-                            taxrate.setError("Please enter a number");
+                    taxrate.setError("Please enter a number for Tax Rate");
+                } else if (Double.parseDouble(home_value.getText().toString()) <
+                        Double.parseDouble(down_payment.getText().toString())) {
+                    home_value.setError("Home Value Must be Greater than Down Payment");
                 } else {
                     hv = Double.parseDouble(home_value.getText().toString());
                     dp = Double.parseDouble(down_payment.getText().toString());
@@ -69,15 +74,14 @@ public class CalculateLoan extends AppCompatActivity {
                     int m = now.get(Calendar.MONTH);
                     int y = now.get(Calendar.YEAR) + terms;
                     String s = now.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.US);
-                    paydate.setText(s+" "+y+"");
+                    paydate.setText(s + " " + y + "");
                     monthlypayment.setText("" + Math.round(mp * 100.00) / 100.00);
                     tip1.setText("" + Math.round(tip * 100.00) / 100.00);
                     tax_paid.setText("" + Math.round(tpt * 100.00) / 100.00);
 
                 }
             }
-
-        });
+    });
         final Button reset = (Button) findViewById(R.id.Reset);
         reset.setOnClickListener(new View.OnClickListener(){
             @Override
