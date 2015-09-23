@@ -2,7 +2,6 @@ package com.example.nmendiratta.mortgagecalculator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,13 +44,13 @@ public class CalculateLoan extends AppCompatActivity {
                     home_value.setError("Please enter a number for Home Value");
                 } else if (down_payment.getText().toString().length() < 0) {
                     down_payment.setError("Please enter a number for Down Payment");
-                } else if (apr.getText().toString().length() <= 0) {
-                    apr.setError("Please enter a number for APR");
-                } else if (taxrate.getText().toString().length() <= 0) {
-                    taxrate.setError("Please enter a number for Tax Rate");
+                } else if (apr.getText().toString().length() <= 0 || Double.parseDouble(apr.getText().toString()) > 100) {
+                    apr.setError("Please enter a number less than 100 for APR");
+                } else if (taxrate.getText().toString().length() <= 0 || Double.parseDouble(taxrate.getText().toString()) >100) {
+                    taxrate.setError("Please enter a number for Tax Rate less than 100");
                 } else if (Double.parseDouble(home_value.getText().toString()) <
                         Double.parseDouble(down_payment.getText().toString())) {
-                    home_value.setError("Home Value Must be Greater than Down Payment");
+                    down_payment.setError("Down Payment must be smaller than Home Value");
                 } else {
                     hv = Double.parseDouble(home_value.getText().toString());
                     dp = Double.parseDouble(down_payment.getText().toString());
@@ -71,9 +70,9 @@ public class CalculateLoan extends AppCompatActivity {
                     tip = (mp * N) - P - tpt;
 
                     Calendar now = Calendar.getInstance();
-                    int m = now.get(Calendar.MONTH);
                     int y = now.get(Calendar.YEAR) + terms;
-                    String s = now.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.US);
+                    now.add(Calendar.DATE, terms * 365);
+                    String s = now.getDisplayName(now.MONTH, Calendar.SHORT, Locale.US);
                     paydate.setText(s + " " + y + "");
                     monthlypayment.setText("" + Math.round(mp * 100.00) / 100.00);
                     tip1.setText("" + Math.round(tip * 100.00) / 100.00);

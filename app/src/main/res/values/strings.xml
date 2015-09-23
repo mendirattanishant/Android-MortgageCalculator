@@ -13,7 +13,7 @@
     <string name="resetbutton">Reset</string>
     <string name="totaltaxpaid">Total Tax Paid</string>
     <string name="totalinterestpaid">Total Interest Paid</string>
-    <string name="monthlypayment">Total Tax Paid</string>
+    <string name="monthlypayment">Monthly Payment</string>
     <string-array name="numbers">
         <item>15</item>
         <item>20</item>
